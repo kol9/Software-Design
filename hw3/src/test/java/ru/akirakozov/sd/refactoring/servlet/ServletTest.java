@@ -8,7 +8,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ServletTest {
 
@@ -17,14 +20,12 @@ public class ServletTest {
     private static final String TEST_PRODUCT_NAME = "Book";
     private static final long TEST_PRODUCT_PRICE = 1000;
 
+    private final ProductsDatabaseManager databaseManager = new ProductsDatabaseManager(TEST_DATABASE_URL);
+
     @BeforeEach
     public void dropTable() {
-        try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-            String sql = "DROP TABLE IF EXISTS PRODUCT";
-            Statement stmt = c.createStatement();
-
-            stmt.executeUpdate(sql);
-            stmt.close();
+        try {
+            databaseManager.dropDatabase();
         } catch (Exception e) {
             Assertions.fail();
         }
@@ -32,15 +33,8 @@ public class ServletTest {
 
     @BeforeEach
     public void initialiseDatabaseIfNeeded() {
-        try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-            String sql = "CREATE TABLE IF NOT EXISTS PRODUCT" +
-                    "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                    " NAME           TEXT    NOT NULL, " +
-                    " PRICE          INT     NOT NULL)";
-            Statement stmt = c.createStatement();
-
-            stmt.executeUpdate(sql);
-            stmt.close();
+        try {
+            databaseManager.createDatabase();
         } catch (Exception e) {
             Assertions.fail();
         }
@@ -48,18 +42,8 @@ public class ServletTest {
 
     @Test
     public void emptyGetProductsTest() {
-        try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT");
-
-            long total = 0;
-            while (rs.next()) {
-                total += 1;
-            }
-            Assertions.assertEquals(0, total);
-
-            rs.close();
-            stmt.close();
+        try {
+            Assertions.assertEquals(0, databaseManager.getAllProducts().size());
         } catch (Exception e) {
             Assertions.fail();
         }
