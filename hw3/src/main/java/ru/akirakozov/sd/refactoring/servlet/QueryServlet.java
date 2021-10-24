@@ -2,6 +2,7 @@ package ru.akirakozov.sd.refactoring.servlet;
 
 import ru.akirakozov.sd.refactoring.products.ProductInfo;
 import ru.akirakozov.sd.refactoring.products.ProductsDatabaseManager;
+import ru.akirakozov.sd.refactoring.products.ProductsHtmlResponseWriter;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,53 +18,39 @@ public class QueryServlet extends HttpServlet {
         String command = request.getParameter("command");
 
         ProductsDatabaseManager manager = new ProductsDatabaseManager("jdbc:sqlite:products.db");
+        ProductsHtmlResponseWriter responseWriter = new ProductsHtmlResponseWriter(response);
 
         if ("max".equals(command)) {
             try {
                 ProductInfo product = manager.getProductWithMaxPrice();
-                response.getWriter().println("<html><body>");
-                response.getWriter().println("<h1>Product with max price: </h1>");
-                response.getWriter().println(product.getName() + "\t" + product.getPrice() + "</br>");
-                response.getWriter().println("</body></html>");
+                responseWriter.printSingleProductInfo(product, "Product with max price:");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else if ("min".equals(command)) {
             try {
                 ProductInfo product = manager.getProductWithMinPrice();
-                response.getWriter().println("<html><body>");
-                response.getWriter().println("<h1>Product with min price: </h1>");
-                response.getWriter().println(product.getName() + "\t" + product.getPrice() + "</br>");
-                response.getWriter().println("</body></html>");
+                responseWriter.printSingleProductInfo(product, "Product with min price:");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else if ("sum".equals(command)) {
             try {
                 int sum = manager.getProductsPriceSum();
-                response.getWriter().println("<html><body>");
-                response.getWriter().println("Summary price: ");
-                response.getWriter().println(sum);
-                response.getWriter().println("</body></html>");
+                responseWriter.printSingleString("Summary price: " + sum);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else if ("count".equals(command)) {
             try {
                 int count = manager.getProductsCount();
-                response.getWriter().println("<html><body>");
-                response.getWriter().println("Number of products: ");
-                response.getWriter().println(count);
-                response.getWriter().println("</body></html>");
+                responseWriter.printSingleString("Number of products: " + count);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else {
             response.getWriter().println("Unknown command: " + command);
         }
-
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
     }
 
 }

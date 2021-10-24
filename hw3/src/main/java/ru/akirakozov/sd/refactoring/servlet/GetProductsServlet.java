@@ -2,6 +2,7 @@ package ru.akirakozov.sd.refactoring.servlet;
 
 import ru.akirakozov.sd.refactoring.products.ProductInfo;
 import ru.akirakozov.sd.refactoring.products.ProductsDatabaseManager;
+import ru.akirakozov.sd.refactoring.products.ProductsHtmlResponseWriter;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,19 +19,12 @@ public class GetProductsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         ProductsDatabaseManager manager = new ProductsDatabaseManager("jdbc:sqlite:products.db");
+        ProductsHtmlResponseWriter responseWriter = new ProductsHtmlResponseWriter(response);
         try {
             List<ProductInfo> products = manager.getAllProducts();
-            response.getWriter().println("<html><body>");
-
-            for (ProductInfo product : products) {
-                response.getWriter().println(product.getName() + "\t" + product.getPrice() + "</br>");
-            }
-            response.getWriter().println("</body></html>");
+            responseWriter.printProductsInfo(products);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        response.setContentType("text/html");
-        response.setStatus(HttpServletResponse.SC_OK);
     }
 }
