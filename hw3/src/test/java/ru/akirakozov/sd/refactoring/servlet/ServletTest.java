@@ -52,33 +52,12 @@ public class ServletTest {
     @Test
     public void simpleAddGetProductsTest() {
         try {
-            try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-                String sql = "INSERT INTO PRODUCT " +
-                        "(NAME, PRICE) VALUES (\"" + TEST_PRODUCT_NAME + "\"," + TEST_PRODUCT_PRICE + ")";
-                Statement stmt = c.createStatement();
-                stmt.executeUpdate(sql);
-                stmt.close();
-            }
-        } catch (Exception e) {
-            Assertions.fail();
-        }
+            databaseManager.addProduct(TEST_PRODUCT_NAME, TEST_PRODUCT_PRICE);
+            List<ProductInfo> products = databaseManager.getAllProducts();
 
-        try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT");
-
-            long total = 0;
-            while (rs.next()) {
-                total += 1;
-                String name = rs.getString("name");
-                int price = rs.getInt("price");
-                Assertions.assertEquals(TEST_PRODUCT_NAME, name);
-                Assertions.assertEquals(TEST_PRODUCT_PRICE, price);
-            }
-            Assertions.assertEquals(1, total);
-
-            rs.close();
-            stmt.close();
+            Assertions.assertEquals(1, products.size());
+            Assertions.assertEquals(TEST_PRODUCT_NAME, products.get(0).getName());
+            Assertions.assertEquals(TEST_PRODUCT_PRICE, products.get(0).getPrice());
         } catch (Exception e) {
             Assertions.fail();
         }

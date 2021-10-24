@@ -61,4 +61,13 @@ public class ProductsDatabaseManager {
         return products;
     }
 
+    public void addProduct(String name, long price) throws SQLException {
+        try (Connection c = DriverManager.getConnection(databaseUrl)) {
+            String sql = "INSERT INTO PRODUCT " +
+                    "(NAME, PRICE) VALUES (\"" + name + "\"," + price + ")";
+            Statement stmt = c.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+        }
+    }
 }
