@@ -4,10 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -67,19 +63,9 @@ public class ServletTest {
     public void queryMinTest() {
         List<Integer> prices = new ArrayList<>(Arrays.asList(3, 45, 100, 55, 32, 1, 64, 2));
         addSomeProducts(prices);
-
-        try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT ORDER BY PRICE LIMIT 1");
-
-            while (rs.next()) {
-                String name = rs.getString("name");
-                int price = rs.getInt("price");
-                Assertions.assertEquals(Collections.min(prices), price);
-            }
-
-            rs.close();
-            stmt.close();
+        try {
+            ProductInfo product = databaseManager.getProductWithMinPrice();
+            Assertions.assertEquals(Collections.min(prices), product.getPrice());
         } catch (Exception e) {
             Assertions.fail();
         }
@@ -101,18 +87,9 @@ public class ServletTest {
     public void queryCountTest() {
         List<Integer> prices = new ArrayList<>(Arrays.asList(3, 45, 100, 55, 32, 1, 64, 2));
         addSomeProducts(prices);
-
-        try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM PRODUCT");
-
-            while (rs.next()) {
-                int count = rs.getInt(1);
-                Assertions.assertEquals(prices.size(), count);
-            }
-
-            rs.close();
-            stmt.close();
+        try {
+            int count = databaseManager.getProductsCount();
+            Assertions.assertEquals(prices.size(), count);
         } catch (Exception e) {
             Assertions.fail();
         }
@@ -122,22 +99,12 @@ public class ServletTest {
     public void querySumTest() {
         List<Integer> prices = new ArrayList<>(Arrays.asList(3, 45, 100, 55, 32, 1, 64, 2));
         addSomeProducts(prices);
-
-        try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT SUM(price) FROM PRODUCT");
-
-            while (rs.next()) {
-                int sum = rs.getInt(1);
-                Assertions.assertEquals(prices.stream().mapToInt(a -> a).sum(), sum);
-            }
-
-            rs.close();
-            stmt.close();
+        try {
+            int sum = databaseManager.getProductsPriceSum();
+            Assertions.assertEquals(prices.stream().mapToInt(a -> a).sum(), sum);
         } catch (Exception e) {
             Assertions.fail();
         }
-
     }
 
     // Helpers

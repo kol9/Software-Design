@@ -85,4 +85,47 @@ public class ProductsDatabaseManager {
             return new ProductInfo(name, price);
         }
     }
+
+    public ProductInfo getProductWithMinPrice() throws SQLException {
+        try (Connection c = DriverManager.getConnection(databaseUrl)) {
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT ORDER BY PRICE LIMIT 1");
+
+            String name = rs.getString(PRODUCT_COLUMN_NAME);
+            int price = rs.getInt(PRICE_COLUMN_NAME);
+
+            rs.close();
+            stmt.close();
+
+            return new ProductInfo(name, price);
+        }
+    }
+
+    public int getProductsCount() throws SQLException {
+        try (Connection c = DriverManager.getConnection(databaseUrl)) {
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM PRODUCT");
+
+            int sum = rs.getInt(1);
+
+            rs.close();
+            stmt.close();
+
+            return sum;
+        }
+    }
+
+    public int getProductsPriceSum() throws SQLException {
+        try (Connection c = DriverManager.getConnection(databaseUrl)) {
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT SUM(price) FROM PRODUCT");
+
+            int sum = rs.getInt(1);
+
+            rs.close();
+            stmt.close();
+
+            return sum;
+        }
+    }
 }
