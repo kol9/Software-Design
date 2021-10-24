@@ -10,9 +10,9 @@ import java.util.List;
 
 public class ProductsDatabaseManager {
 
-    private static final String DATABASE_NAME = "PRODUCT";
-    private static final String PRODUCT_COLUMN_NAME = "NAME";
-    private static final String PRICE_COLUMN_NAME = "PRICE";
+    public static final String DATABASE_NAME = "PRODUCT";
+    public static final String PRODUCT_COLUMN_NAME = "NAME";
+    public static final String PRICE_COLUMN_NAME = "PRICE";
 
     private final String databaseUrl;
 

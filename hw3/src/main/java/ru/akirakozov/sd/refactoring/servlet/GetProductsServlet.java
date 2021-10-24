@@ -7,7 +7,6 @@ import ru.akirakozov.sd.refactoring.products.ProductsHtmlResponseWriter;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ import java.util.List;
 public class GetProductsServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
         ProductsDatabaseManager manager = new ProductsDatabaseManager("jdbc:sqlite:products.db");
         ProductsHtmlResponseWriter responseWriter = new ProductsHtmlResponseWriter(response);
