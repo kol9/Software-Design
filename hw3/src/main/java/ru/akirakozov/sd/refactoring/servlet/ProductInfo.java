@@ -6,9 +6,9 @@ package ru.akirakozov.sd.refactoring.servlet;
 public class ProductInfo {
 
     private final String name;
-    private final long price;
+    private final int price;
 
-    ProductInfo(String name, long price) {
+    ProductInfo(String name, int price) {
         this.name = name;
         this.price = price;
     }
@@ -17,7 +17,7 @@ public class ProductInfo {
         return name;
     }
 
-    public long getPrice() {
+    public int getPrice() {
         return price;
     }
 }

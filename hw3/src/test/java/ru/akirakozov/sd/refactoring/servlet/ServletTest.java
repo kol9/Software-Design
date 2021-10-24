@@ -89,19 +89,9 @@ public class ServletTest {
     public void queryMaxTest() {
         List<Integer> prices = new ArrayList<>(Arrays.asList(3, 45, 100, 55, 32, 1, 64, 2));
         addSomeProducts(prices);
-
-        try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-            Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT ORDER BY PRICE DESC LIMIT 1");
-
-            while (rs.next()) {
-                String name = rs.getString("name");
-                int price = rs.getInt("price");
-                Assertions.assertEquals(Collections.max(prices), price);
-            }
-
-            rs.close();
-            stmt.close();
+        try {
+            ProductInfo product = databaseManager.getProductWithMaxPrice();
+            Assertions.assertEquals(Collections.max(prices), product.getPrice());
         } catch (Exception e) {
             Assertions.fail();
         }
@@ -153,19 +143,9 @@ public class ServletTest {
     // Helpers
 
     private void addSomeProducts(List<Integer> prices) {
-        for (int i = 0; i < prices.size(); ++i) {
-            addProduct("product" + i, prices.get(i));
-        }
-    }
-
-    private void addProduct(String name, long price) {
         try {
-            try (Connection c = DriverManager.getConnection(TEST_DATABASE_URL)) {
-                String sql = "INSERT INTO PRODUCT " +
-                        "(NAME, PRICE) VALUES (\"" + name + "\"," + price + ")";
-                Statement stmt = c.createStatement();
-                stmt.executeUpdate(sql);
-                stmt.close();
+            for (int i = 0; i < prices.size(); ++i) {
+                databaseManager.addProduct("product" + i, prices.get(i));
             }
         } catch (Exception e) {
             Assertions.fail();

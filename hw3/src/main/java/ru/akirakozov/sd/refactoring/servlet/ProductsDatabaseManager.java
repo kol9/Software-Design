@@ -70,4 +70,19 @@ public class ProductsDatabaseManager {
             stmt.close();
         }
     }
+
+    public ProductInfo getProductWithMaxPrice() throws SQLException {
+        try (Connection c = DriverManager.getConnection(databaseUrl)) {
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT ORDER BY PRICE DESC LIMIT 1");
+
+            String name = rs.getString(PRODUCT_COLUMN_NAME);
+            int price = rs.getInt(PRICE_COLUMN_NAME);
+
+            rs.close();
+            stmt.close();
+
+            return new ProductInfo(name, price);
+        }
+    }
 }
