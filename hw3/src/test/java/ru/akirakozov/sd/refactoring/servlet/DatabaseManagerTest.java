@@ -3,13 +3,15 @@ package ru.akirakozov.sd.refactoring.servlet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.akirakozov.sd.refactoring.products.ProductInfo;
+import ru.akirakozov.sd.refactoring.products.ProductsDatabaseManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class ServletTest {
+public class DatabaseManagerTest {
 
     private static final String TEST_DATABASE_URL = "jdbc:sqlite:test.db";
 
