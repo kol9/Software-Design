@@ -42,7 +42,7 @@ public class PostInfo {
         return Objects.hash(date, id, text);
     }
 
-    public String toJson() {
+    public String toJsonString() {
         return "{" +
                 "date:" + date.getTime()/1000 +
                 ", id:" + id +

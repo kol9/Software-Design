@@ -47,6 +47,6 @@ public class StubServerTest {
     }
 
     private Action jsonContent(PostInfo obj) {
-        return stringContent(obj.toJson());
+        return stringContent(obj.toJsonString());
     }
 }
