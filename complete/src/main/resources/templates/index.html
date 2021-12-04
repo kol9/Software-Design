@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TODO List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        table,
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+<h2>TODO List</h2>
+<th:block th:each="todoList : ${lists}">
+    <h3 th:text="${todoList.getName()}"></h3>
+    <table>
+        <th:block th:each="todoTask : ${todoList.getTaskList()}">
+            <tr>
+                <td th:text="${todoTask.getText()}"></td>
+                <td th:text="${todoTask.getStatus()}"></td>
+                <td>
+                    <form method="POST" action="/updateTaskStatus">
+                        <input type="hidden" name="taskId" th:value="${todoTask.getId()}"/>
+                        <input type="submit" value="Update status"/>
+                    </form>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+    <form th:object="${task}" method="POST" action="/addTask">
+        <table>
+            <tr>
+                <td><input type="text" th:field="*{text}"/></td>
+                <input type="hidden" th:name="toListId" th:value="${todoList.getId()}"/>
+            </tr>
+        </table>
+
+        <input type="submit" value="add">
+    </form>
+    <form method="POST" action="/deleteList">
+        <input type="hidden" th:value="${todoList.getId()}" th:name="listId"/>
+        <input type="submit" value="Delete list"/>
+    </form>
+
+</th:block>
+
+<h2>Create new list</h2>
+
+<form th:object="${list}" method="POST" action="/addList">
+    <table>
+        <tr>
+            <td><input type="text" th:field="*{name}"/></td>
+            <td><label>Name</label></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="add">
+</form>
+
+</body>
+</html>
