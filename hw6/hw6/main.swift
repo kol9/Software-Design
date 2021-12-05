@@ -7,24 +7,37 @@
 
 import Foundation
 
-let str = "(5+*4)/3"
-
-let tokenizer = Tokenizer()
-
-tokenizer.tokenize(str)
-
-print(tokenizer.tokens)
-
-let parserVisitor = ParserVisitor()
-
-tokenizer.tokens.forEach { $0.accept(parserVisitor) }
-
-if let tokens = parserVisitor.rpnTokens.tokens {
-    print(tokens)
+func parseEndEvaluate(_ str: String) {
+    let tokenizer = Tokenizer()
+    let parserVisitor = ParserVisitor()
+    let printVisitor1 = PrintVisitor()
+    let printVisitor2 = PrintVisitor()
     let calcVisitor = CalcVisitor()
-    tokens.forEach { $0.accept(calcVisitor) }
-    
-    print(calcVisitor.result)
+
+    tokenizer.tokenize(str)
+    if tokenizer.state is TokenizerStateError {
+        print("Error occured in tokenizing")
+        return
+    }
+    tokenizer.tokens.forEach { $0.accept(printVisitor1) }
+    tokenizer.tokens.forEach { $0.accept(parserVisitor) }
+    print()
+    switch parserVisitor.rpnTokens {
+    case .error(let e):
+        print("Error: \(e)")
+        return
+    case .rpnTokens(let rpn):
+        rpn.forEach { $0.accept(printVisitor2) }
+        rpn.forEach { $0.accept(calcVisitor) }
+        print()
+        switch calcVisitor.result {
+        case .error(let e):
+            print("Error: \(e)")
+        case .value(let v):
+            print("Result is \(v)")
+        }
+    }
 }
 
+parseEndEvaluate("(2+2+2+2)/2")
 

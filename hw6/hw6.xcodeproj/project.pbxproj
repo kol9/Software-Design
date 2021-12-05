@@ -13,6 +13,10 @@
 		95C082BB275CCACE00841803 /* ParserVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082BA275CCACE00841803 /* ParserVisitor.swift */; };
 		95C082BD275CD7FA00841803 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082BC275CD7FA00841803 /* Errors.swift */; };
 		95C082BF275CDB7800841803 /* CalcVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082BE275CDB7800841803 /* CalcVisitor.swift */; };
+		95C082C2275CE36C00841803 /* ScalarToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082C1275CE36C00841803 /* ScalarToken.swift */; };
+		95C082C4275CE37F00841803 /* OperationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082C3275CE37F00841803 /* OperationToken.swift */; };
+		95C082C6275CE39300841803 /* ExtraToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082C5275CE39300841803 /* ExtraToken.swift */; };
+		95C082C8275CE40D00841803 /* PrintVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082C7275CE40D00841803 /* PrintVisitor.swift */; };
 		95D48069275CC37B007D1159 /* ArithToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D48068275CC37B007D1159 /* ArithToken.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +40,10 @@
 		95C082BA275CCACE00841803 /* ParserVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserVisitor.swift; sourceTree = "<group>"; };
 		95C082BC275CD7FA00841803 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		95C082BE275CDB7800841803 /* CalcVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcVisitor.swift; sourceTree = "<group>"; };
+		95C082C1275CE36C00841803 /* ScalarToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalarToken.swift; sourceTree = "<group>"; };
+		95C082C3275CE37F00841803 /* OperationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationToken.swift; sourceTree = "<group>"; };
+		95C082C5275CE39300841803 /* ExtraToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraToken.swift; sourceTree = "<group>"; };
+		95C082C7275CE40D00841803 /* PrintVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintVisitor.swift; sourceTree = "<group>"; };
 		95D48068275CC37B007D1159 /* ArithToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArithToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,8 +79,8 @@
 			children = (
 				958BFFA5275BBA250065E425 /* main.swift */,
 				958BFFAC275BBEC30065E425 /* Tokenizer.swift */,
-				95D48068275CC37B007D1159 /* ArithToken.swift */,
 				95C082BC275CD7FA00841803 /* Errors.swift */,
+				95C082C0275CE35500841803 /* Token */,
 				95C082B9275CCABA00841803 /* Visitor */,
 			);
 			path = hw6;
@@ -83,9 +91,21 @@
 			children = (
 				95C082B7275CCA2500841803 /* TokenVisitor.swift */,
 				95C082BA275CCACE00841803 /* ParserVisitor.swift */,
+				95C082C7275CE40D00841803 /* PrintVisitor.swift */,
 				95C082BE275CDB7800841803 /* CalcVisitor.swift */,
 			);
 			path = Visitor;
+			sourceTree = "<group>";
+		};
+		95C082C0275CE35500841803 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				95D48068275CC37B007D1159 /* ArithToken.swift */,
+				95C082C1275CE36C00841803 /* ScalarToken.swift */,
+				95C082C3275CE37F00841803 /* OperationToken.swift */,
+				95C082C5275CE39300841803 /* ExtraToken.swift */,
+			);
+			path = Token;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,7 +167,11 @@
 			files = (
 				958BFFA6275BBA250065E425 /* main.swift in Sources */,
 				95C082BF275CDB7800841803 /* CalcVisitor.swift in Sources */,
+				95C082C6275CE39300841803 /* ExtraToken.swift in Sources */,
 				95D48069275CC37B007D1159 /* ArithToken.swift in Sources */,
+				95C082C2275CE36C00841803 /* ScalarToken.swift in Sources */,
+				95C082C4275CE37F00841803 /* OperationToken.swift in Sources */,
+				95C082C8275CE40D00841803 /* PrintVisitor.swift in Sources */,
 				95C082B8275CCA2500841803 /* TokenVisitor.swift in Sources */,
 				95C082BB275CCACE00841803 /* ParserVisitor.swift in Sources */,
 				95C082BD275CD7FA00841803 /* Errors.swift in Sources */,
