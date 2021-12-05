@@ -7,14 +7,24 @@
 
 import Foundation
 
-print("Hello, World!")
-
-let str = "(2 + 2) / 2 - 228 * 44 - (2 + 3)"
-
+let str = "(5+*4)/3"
 
 let tokenizer = Tokenizer()
 
 tokenizer.tokenize(str)
 
 print(tokenizer.tokens)
+
+let parserVisitor = ParserVisitor()
+
+tokenizer.tokens.forEach { $0.accept(parserVisitor) }
+
+if let tokens = parserVisitor.rpnTokens.tokens {
+    print(tokens)
+    let calcVisitor = CalcVisitor()
+    tokens.forEach { $0.accept(calcVisitor) }
+    
+    print(calcVisitor.result)
+}
+
 

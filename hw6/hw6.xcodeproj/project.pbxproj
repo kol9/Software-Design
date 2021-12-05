@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		958BFFA6275BBA250065E425 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958BFFA5275BBA250065E425 /* main.swift */; };
 		958BFFAD275BBEC30065E425 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958BFFAC275BBEC30065E425 /* Tokenizer.swift */; };
+		95C082B8275CCA2500841803 /* TokenVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082B7275CCA2500841803 /* TokenVisitor.swift */; };
+		95C082BB275CCACE00841803 /* ParserVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082BA275CCACE00841803 /* ParserVisitor.swift */; };
+		95C082BD275CD7FA00841803 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082BC275CD7FA00841803 /* Errors.swift */; };
+		95C082BF275CDB7800841803 /* CalcVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C082BE275CDB7800841803 /* CalcVisitor.swift */; };
 		95D48069275CC37B007D1159 /* ArithToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D48068275CC37B007D1159 /* ArithToken.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +32,10 @@
 		958BFFA2275BBA250065E425 /* hw6 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hw6; sourceTree = BUILT_PRODUCTS_DIR; };
 		958BFFA5275BBA250065E425 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		958BFFAC275BBEC30065E425 /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
+		95C082B7275CCA2500841803 /* TokenVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenVisitor.swift; sourceTree = "<group>"; };
+		95C082BA275CCACE00841803 /* ParserVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserVisitor.swift; sourceTree = "<group>"; };
+		95C082BC275CD7FA00841803 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		95C082BE275CDB7800841803 /* CalcVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcVisitor.swift; sourceTree = "<group>"; };
 		95D48068275CC37B007D1159 /* ArithToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArithToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,8 +72,20 @@
 				958BFFA5275BBA250065E425 /* main.swift */,
 				958BFFAC275BBEC30065E425 /* Tokenizer.swift */,
 				95D48068275CC37B007D1159 /* ArithToken.swift */,
+				95C082BC275CD7FA00841803 /* Errors.swift */,
+				95C082B9275CCABA00841803 /* Visitor */,
 			);
 			path = hw6;
+			sourceTree = "<group>";
+		};
+		95C082B9275CCABA00841803 /* Visitor */ = {
+			isa = PBXGroup;
+			children = (
+				95C082B7275CCA2500841803 /* TokenVisitor.swift */,
+				95C082BA275CCACE00841803 /* ParserVisitor.swift */,
+				95C082BE275CDB7800841803 /* CalcVisitor.swift */,
+			);
+			path = Visitor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,7 +146,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				958BFFA6275BBA250065E425 /* main.swift in Sources */,
+				95C082BF275CDB7800841803 /* CalcVisitor.swift in Sources */,
 				95D48069275CC37B007D1159 /* ArithToken.swift in Sources */,
+				95C082B8275CCA2500841803 /* TokenVisitor.swift in Sources */,
+				95C082BB275CCACE00841803 /* ParserVisitor.swift in Sources */,
+				95C082BD275CD7FA00841803 /* Errors.swift in Sources */,
 				958BFFAD275BBEC30065E425 /* Tokenizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

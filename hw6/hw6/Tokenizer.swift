@@ -51,7 +51,9 @@ class TokenizerStateNumber: TokenizerStateProtocol {
     
     func process(_ c: Character?, with tokenizer: Tokenizer) {
         guard let c = c else {
+            tokenizer.tokens.append(ScalarToken.intValue(v: self.value))
             tokenizer.state = TokenizerStateStart()
+            tokenizer.state.process(c, with: tokenizer)
             return
         }
         let strValue = "\(c)"
