@@ -39,5 +39,8 @@ func parseEndEvaluate(_ str: String) {
     }
 }
 
-parseEndEvaluate("(2+2+2+2)/2")
+
+if let str = readLine() {
+    parseEndEvaluate(str)
+}
 
