@@ -1,7 +1,4 @@
 import io.reactivex.netty.protocol.http.server.HttpServer;
-import io.reactivex.netty.protocol.http.server.HttpServerRequest;
-import io.reactivex.netty.protocol.http.server.HttpServerResponse;
-import org.bson.ByteBuf;
 import rx.Observable;
 
 /**

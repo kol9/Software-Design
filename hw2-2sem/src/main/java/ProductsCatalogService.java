@@ -2,9 +2,7 @@ import com.mongodb.rx.client.Success;
 import io.netty.buffer.ByteBuf;
 import io.reactivex.netty.protocol.http.server.HttpServerRequest;
 import rx.Observable;
-import rx.Subscriber;
 
-import java.util.List;
 
 /**
  * @author Nikolay Yarlychenko
